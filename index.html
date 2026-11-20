@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GDS Refund Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="hero">
+    <svg class="hero-path" viewBox="0 0 800 160" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M-10 140 C 200 140, 300 20, 810 40" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="1.5" stroke-dasharray="3 7"/>
+    </svg>
+    <div class="hero-inner">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z"/></svg>
+        </span>
+        <div>
+          <h1>GDS Refund Assistant</h1>
+          <p>Check. Verify. Note.</p>
+        </div>
+      </div>
+      <button type="button" class="btn-ghost js-refresh">Refresh</button>
+    </div>
+  </header>
+
+  <div class="app">
+    <nav class="tabs" role="tablist">
+      <button type="button" class="tab is-active" role="tab" data-tab="check" aria-selected="true">Check</button>
+      <button type="button" class="tab" role="tab" data-tab="qc" aria-selected="false">QC</button>
+      <button type="button" class="tab" role="tab" data-tab="template" aria-selected="false">Template</button>
+    </nav>
+
+    <main>
+      <!-- CHECK -->
+      <section class="panel is-active" id="panel-check" role="tabpanel">
+        <div class="card">
+          <label for="airline-code">AIRLINE CODE</label>
+          <input id="airline-code" type="text" maxlength="3" autocomplete="off" spellcheck="false" placeholder="Enter airline code (e.g. AI)">
+        </div>
+
+        <div class="ticket" id="atc-block" hidden>
+          <div class="ticket-top">
+            <span class="ticket-code" id="ticket-code"></span>
+            <span class="ticket-name" id="airline-name"></span>
+          </div>
+          <div class="ticket-cut"></div>
+          <div class="ticket-bottom">
+            <span class="ticket-label">ATC support</span>
+            <div id="atc-result"></div>
+          </div>
+        </div>
+
+        <details class="errors" id="errors-block" hidden>
+          <summary>TOP ERRORS</summary>
+          <div id="errors-list"></div>
+        </details>
+
+        <div class="actions"><button type="button" class="btn-text js-refresh">Refresh</button></div>
+      </section>
+
+      <!-- QC -->
+      <section class="panel" id="panel-qc" role="tabpanel">
+        <div class="card">
+          <span class="label">Airline code</span>
+          <p class="synced" id="qc-code">Enter an airline code in Check.</p>
+          <label for="qc-scenario" class="gap">Scenario</label>
+          <select id="qc-scenario"></select>
+        </div>
+
+        <div class="card" id="qc-block" hidden>
+          <h2>Checkpoints</h2>
+          <ul class="checklist" id="qc-list"></ul>
+        </div>
+
+        <div class="actions"><button type="button" class="btn-text js-refresh">Refresh</button></div>
+      </section>
+
+      <!-- TEMPLATE -->
+      <section class="panel" id="panel-template" role="tabpanel">
+        <div class="card">
+          <label for="tpl-select">Template</label>
+          <select id="tpl-select"></select>
+        </div>
+
+        <div class="card" id="tpl-block" hidden>
+          <label for="tpl-note">Generated note</label>
+          <textarea id="tpl-note" rows="8"></textarea>
+          <div class="copy-row">
+            <button type="button" class="btn-primary" id="copy-btn">Copy</button>
+            <span class="status" id="copy-status" role="status"></span>
+          </div>
+        </div>
+
+        <div class="actions"><button type="button" class="btn-text js-refresh">Refresh</button></div>
+      </section>
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
